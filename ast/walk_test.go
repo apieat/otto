@@ -3,9 +3,9 @@ package ast_test
 import (
 	"testing"
 
-	"github.com/robertkrimen/otto/ast"
-	"github.com/robertkrimen/otto/file"
-	"github.com/robertkrimen/otto/parser"
+	"github.com/apieat/otto/ast"
+	"github.com/apieat/otto/file"
+	"github.com/apieat/otto/parser"
 	"github.com/stretchr/testify/require"
 )
 

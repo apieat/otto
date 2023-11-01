@@ -4,8 +4,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/robertkrimen/otto/terst"
-	"github.com/robertkrimen/otto/underscore"
+	"github.com/apieat/otto/terst"
+	"github.com/apieat/otto/underscore"
 )
 
 func init() {

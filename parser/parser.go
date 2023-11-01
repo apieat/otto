@@ -2,7 +2,7 @@
 Package parser implements a parser for JavaScript.
 
 	import (
-	    "github.com/robertkrimen/otto/parser"
+	    "github.com/apieat/otto/parser"
 	)
 
 Parse and return an AST
@@ -39,9 +39,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/robertkrimen/otto/ast"
-	"github.com/robertkrimen/otto/file"
-	"github.com/robertkrimen/otto/token"
+	"github.com/apieat/otto/ast"
+	"github.com/apieat/otto/file"
+	"github.com/apieat/otto/token"
 	"gopkg.in/sourcemap.v1"
 )
 
@@ -84,6 +84,8 @@ type parser struct { //nolint: maligned
 	mode Mode
 
 	file *file.File
+
+	fixer Fixer
 
 	comments *ast.Comments
 }
@@ -299,8 +301,16 @@ func (p *parser) idxOf(offset int) file.Idx {
 func (p *parser) expect(value token.Token) file.Idx {
 	idx := p.idx
 	if p.token != value {
+		if p.fixer != nil {
+			fixture, err := p.fixer.Fix(p.str, p.idx, value)
+			if err == nil {
+				p.str = p.str[:p.idx] + fixture.Str + p.str[p.idx:]
+				goto next
+			}
+		}
 		p.errorUnexpectedToken(p.token)
 	}
+next:
 	p.next()
 	return idx
 }

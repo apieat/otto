@@ -1,8 +1,8 @@
 package otto
 
 import (
-	"github.com/robertkrimen/otto/ast"
-	"github.com/robertkrimen/otto/file"
+	"github.com/apieat/otto/ast"
+	"github.com/apieat/otto/file"
 )
 
 type compiler struct {
